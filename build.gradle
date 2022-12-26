@@ -2,8 +2,13 @@ plugins {
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
+jacoco {
+	toolVersion = "0.8.8"
+	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
 group = 'com.app'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -17,8 +22,24 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.6'
+	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.2'
+// https://mvnrepository.com/artifact/org.junit.platform/junit-platform-gradle-plugin
+	implementation group: 'org.junit.platform', name: 'junit-platform-gradle-plugin', version: '1.0.1'
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.7'
+	//implementation("org.liquibase:liquibase-core:3.8.2")
+	runtimeOnly('javax.xml.bind:jaxb-api:2.4.0-b180830.0359')
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+test {
+	finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+	dependsOn test // tests are required to run before generating the report
 }
