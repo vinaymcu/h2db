@@ -84,7 +84,8 @@ public class AccountController {
         User user=new User();
         user.setCity("hello");
         user.setUsername("vinay");
-        accountService.getAccountDetails();
+        accountService.getAccountDetails1();
+        accountService.getAccountHello();
 
         ResponseEntity<User> response=new ResponseEntity<User>(user,HttpStatus.OK);
         return response;
