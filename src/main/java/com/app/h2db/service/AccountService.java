@@ -139,4 +139,8 @@ public class AccountService {
 //        System.out.println("AFERT PERSIST REPOSITORY>>>>>>>>>"+aaa);
 //    }
 
+    public void getAccountDetails(){
+        System.out.println("hello >>>>>>");
+    }
+
 }
