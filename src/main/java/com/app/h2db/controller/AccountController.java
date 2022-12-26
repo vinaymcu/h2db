@@ -82,6 +82,8 @@ public class AccountController {
     @GetMapping("account/detail")
     public ResponseEntity<User>  getAccountDetails(){
         User user=new User();
+        user.setCity("hello");
+        user.setUsername("vinay");
 
         ResponseEntity<User> response=new ResponseEntity<User>(user,HttpStatus.OK);
         return response;
